@@ -23,12 +23,12 @@ fkList <- list(df1 = list(References = NULL, Keys = NULL),
 createDB(dfList = dfList, pkList =  pkList, fkList = fkList, filePath = "insert/path/example.db")
 
 ### get information from data base
-names_of_variables <- dbNames(filePath = insert/path/example.db")
-key_structure <- dbKeys(filePath = insert/path/example.db")
+names_of_variables <- dbNames(filePath = "insert/path/example.db")
+key_structure <- dbKeys(filePath = "insert/path/example.db")
 
 ### pull data from data base
 # single data table
-single_data_table <- dbSingleDF(df_name = "df1", filePath = "exampleDB.db")
+single_data_table <- dbSingleDF(df_name = "df1", filePath = "insert/path/example.db")
 # variable selection from multiple tables
-dbSingleDF(vSelect = c("var1", "var2"), filePath = "exampleDB.db")
+dbSingleDF(vSelect = c("var1", "var2"), filePath = "insert/path/example.db")
 ```
