@@ -34,6 +34,11 @@ test_that("Errors are called correctly ", {
                "Foreign Key reference for df2 must be exactly one other data frame")
 })
 
+names(dfList$df1) <- c("v.1", "ID2")
+test_that("Errors are called correctly ", {
+  expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList),
+               "Variable names are not allowed to contain '.' in SQLite.")
+})
 
 # tbd: further tests?
 

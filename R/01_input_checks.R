@@ -31,6 +31,7 @@ check_df <- function(df, primeKey, df_name) {
   illegal_names <- c("Meta_Data", "Meta_Information")
   if(any(names(df) %in% illegal_names)) stop(paste("One of the following forbidden data frame names has been used:",
                                                    paste(illegal_names, collapse = ", ")))
+  if(any(grepl("\\.", names(df)))) stop(paste("Variable names are not allowed to contain '.' in SQLite."))
   return()
 }
 

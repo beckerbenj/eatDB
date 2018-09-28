@@ -38,8 +38,8 @@ pkList <- list(df1 = "v1", df2 = c("ID2", "v2"))
 # Specify foreign keys
 fkList <- list(df1 = list(References = NULL, Keys = NULL),
                df2 = list(References = "df1", Keys = "ID2"))
-# Create in memory data base
 
-createDB <- function(dfList = dfList, pkList = pkList, fkList = fkList, metaData = NULL, filePath)
+# Create in memory data base
+createDB(dfList = dfList, pkList = pkList, fkList = fkList, metaData = NULL, filePath = "exampleDB.db")
 
 }

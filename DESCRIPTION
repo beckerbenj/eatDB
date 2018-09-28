@@ -10,3 +10,4 @@ LazyData: true
 Depends: DBI, RSQLite
 RoxygenNote: 6.0.1
 Suggests: testthat
+SystemRequirements: SQLite3
