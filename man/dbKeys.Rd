@@ -26,6 +26,6 @@ key structure of a relational data base.
 \examples{
 # See vignette.
 # not run:
-# dbKeys(filePath = 'exampleDB.db')
+# dbKeys(filePath = "exampleDB.db")
 
 }

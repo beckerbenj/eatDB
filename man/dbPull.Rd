@@ -7,7 +7,7 @@
 dbPull(vSelect = NULL, filePath)
 }
 \arguments{
-\item{vSelect}{Character vector of variables that should be pulled from data base.}
+\item{vSelect}{Character vector of variables that should be pulled from data base. If vSelect is NULL, all variables from the data base are selected.}
 
 \item{filePath}{Path of the existing db file.}
 }
@@ -22,6 +22,6 @@ Note that the exact merging process is determined when the data base is created 
 }
 \examples{
 # not run:
-# dbSingleDF(vSelect = c(var1, var5), filePath = 'exampleDB.db')
+# dbSingleDF(vSelect = c("var1", "var5"), filePath = "exampleDB.db")
 
 }

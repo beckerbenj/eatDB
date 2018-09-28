@@ -14,7 +14,7 @@
 #'
 #'@examples
 #' # not run:
-#' # dbSingleDF(vSelect = c(var1, var5), filePath = 'exampleDB.db')
+#' # dbSingleDF(vSelect = c("var1", "var5"), filePath = "exampleDB.db")
 #'
 #'@export
 dbPull <- function(vSelect = NULL, filePath) {

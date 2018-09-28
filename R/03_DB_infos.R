@@ -14,7 +14,7 @@
 #'
 #'@examples
 #' # not run:
-#' # dbNames(filePath = 'exampleDB.db')
+#' # dbNames(filePath = "exampleDB.db")
 #'
 #'@export
 dbNames <- function(filePath, includeMeta = FALSE) {
@@ -55,7 +55,7 @@ dbNames <- function(filePath, includeMeta = FALSE) {
 #'@examples
 #' # See vignette.
 #' # not run:
-#' # dbKeys(filePath = 'exampleDB.db')
+#' # dbKeys(filePath = "exampleDB.db")
 #'
 #'@export
 dbKeys <- function(filePath, includeMeta = FALSE) {
@@ -128,7 +128,7 @@ extract_FKs <- function(table_info) {
 #'@examples
 #' # not run:
 #' # Extract Meta Data
-#' # dbSingleDF(df_name = 'Meta_Data', filePath = 'exampleDB.db')
+#' # dbSingleDF(df_name = "Meta_Data", filePath = "exampleDB.db")
 #'
 #'@export
 dbSingleDF <- function(dfName = 'Meta_Data', filePath) {

@@ -22,6 +22,6 @@ Extracts names of all variables included in the relational data base, structured
 }
 \examples{
 # not run:
-# dbNames(filePath = 'exampleDB.db')
+# dbNames(filePath = "exampleDB.db")
 
 }

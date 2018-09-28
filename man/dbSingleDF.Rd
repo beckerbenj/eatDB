@@ -23,6 +23,6 @@ This function makes use of the DBI::dbReadTable function and extracts a complete
 \examples{
 # not run:
 # Extract Meta Data
-# dbSingleDF(df_name = 'Meta_Data', filePath = 'exampleDB.db')
+# dbSingleDF(df_name = "Meta_Data", filePath = "exampleDB.db")
 
 }

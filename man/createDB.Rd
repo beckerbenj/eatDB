@@ -11,7 +11,7 @@ createDB(dfList, pkList, fkList = NULL, metaData = NULL, filePath)
 
 \item{pkList}{Named list of the primary keys corresponding to the data frames.}
 
-\item{fkList}{Named list of a list per data frame, including its foreign keys and the referenced data frame.}
+\item{fkList}{Named list of a list per data frame, including its foreign keys and the referenced data frame. NULL if only a single data frame is supplied.}
 
 \item{metaData}{Data frame including meta data information about the other data frames.}
 
@@ -21,7 +21,7 @@ createDB(dfList, pkList, fkList = NULL, metaData = NULL, filePath)
 Creates a data base in the given path, returns NULL.
 }
 \description{
-Creates a relational data base from a list of data frames. Primary keys guarantee uniqueness of cases within a single data table. Foreign keys are used to merge data tables. The order in which the data frames are supplied determines the merge order. Currently, only Left Joins are implemented.
+Creates a relational data base from a list of data frames. Primary keys guarantee uniqueness of cases within a single data table. Foreign keys are used to merge data tables. The order in which the data frames are supplied determines the merge order. Currently, only Left Joins are implemented. Also a single data frame can be converted to a data base.
 }
 \details{
 The list structure for dfList, pkList and fkList needs to be exactly the same. All list elements have to be named and in the same order. Primary keys have to be variables or combinations of variables that are unique within the data frame.
