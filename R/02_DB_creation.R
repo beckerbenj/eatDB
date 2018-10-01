@@ -30,7 +30,7 @@
 #'                df2 = list(References = "df1", Keys = "ID2"))
 #'
 #' # Create in memory data base
-#' createDB(dfList = dfList, pkList = pkList, fkList = fkList, metaData = NULL, filePath = "exampleDB.db")
+#' createDB(dfList = dfList, pkList = pkList, fkList = fkList, metaData = NULL, filePath = ":memory:")
 #'
 #'@export
 createDB <- function(dfList, pkList, fkList = NULL, metaData = NULL, filePath) {
@@ -54,13 +54,12 @@ createDB <- function(dfList, pkList, fkList = NULL, metaData = NULL, filePath) {
     metaDatQuery <- writeQ_create(df = metaData, df_name = labelDT_name,
                                 primeKey = NULL, foreignKey = NULL)
   }
-
   # all queries into one object
   createQueries <- c(metaInfQuery, metaDatQuery, dtQueries)
 
   ### 2) Create empty Data base
-  init_DB(filePath)
-
+  # check path / file
+  check_filePath(filePath)
   # Establish Connection, disconnect when function exits
   con <- dbConnect(RSQLite::SQLite(), dbname = filePath)
   on.exit(dbDisconnect(con))
@@ -145,10 +144,9 @@ writeQ_mergeOrder <- function(dfMergeOrder) {
 
 
 # 02) Create Empty Database ---------------------------------------------------------
-## create DB
-init_DB <- function(filePath) {
-  # check path / file
-  check_filePath(filePath)
+## create DB via Shell, deprecated because not needed!
+# initiate via dbConnect
+init_DB_shell <- function(filePath) {
   # create DB, throws an error if sqlite3 not in Path!
   shell(cmd = paste("sqlite3", filePath, ".databases", sep = " "), mustWork = TRUE)
 }

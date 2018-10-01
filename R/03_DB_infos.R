@@ -1,14 +1,14 @@
 
 #### Viewing Interface to data base
 #############################################################################
-#' The variable names in a relational data base.
+#' Variable names in a relational data base.
 #'
 #' Function to get the names of the variables included in the relational data base.
 #'
-#' Extracts names of all variables included in the relational data base, structured as list with the individual data tables as list elements.
+#' Extracts names of all variables included in the relational data base, structured as a list with the individual data tables as elements.
 #'
 #'@param filePath Path of an existing db file.
-#'@param includeMeta Should the variable names of the Meta_Data table should be included.
+#'@param includeMeta Should the variable names of the Meta_Data table be included.
 #'
 #'@return Returns a named list of character vectors with the variables names included in the data tables.
 #'
@@ -38,12 +38,12 @@ dbNames <- function(filePath, includeMeta = FALSE) {
 }
 
 #############################################################################
-#' The keys in a relational data base.
+#' Keys in a relational data base.
 #'
 #' Function to get the primary and foreign keys of the data frames in the relational data base.
 #'
 #' Data in a relational data base are indexed by primary and foreign keys. Primary keys are unique indentifiers
-#' inside the same data table. Foreign keys reference (link) to other data tables. This function returns the
+#' inside a single data table. Foreign keys reference (link) to other data tables. This function returns the
 #' key structure of a relational data base.
 #'
 #'@param filePath Path of the existing db file.
@@ -53,7 +53,6 @@ dbNames <- function(filePath, includeMeta = FALSE) {
 #' data table it references to and the corresponding foreign keys.
 #'
 #'@examples
-#' # See vignette.
 #' # not run:
 #' # dbKeys(filePath = "exampleDB.db")
 #'

@@ -12,13 +12,13 @@ dbPull(vSelect = NULL, filePath)
 \item{filePath}{Path of the existing db file.}
 }
 \value{
-Returns a data frame, including the relevant variables.
+Returns a data frame, including the selected variables. Variables, that exist in more than one data table are only selected from the first data table in the merge order.
 }
 \description{
 Function to extract specific (or all) variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys.
 }
 \details{
-Note that the exact merging process is determined when the data base is created via createDB and can not be altered posthoc. For alternative forms of full requestes please contact the package author as the package is still under development.
+Note that the exact merging process is determined when the data base is created via createDB and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
 }
 \examples{
 # not run:

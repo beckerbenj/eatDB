@@ -10,8 +10,7 @@ createDB(dfList = dfList, pkList = pkList, fkList = fkList, metaData = metaData,
 
 ### test shell + sqlite3
 test_that("Data base can be created via Shell ", {
-  expect_message(init_DB(filePath = ":memory:"),
-  "filePath points to work memory")
+  expect_silent(init_DB_shell(filePath = ":memory:"))
 })
 
 ### data table query creation
