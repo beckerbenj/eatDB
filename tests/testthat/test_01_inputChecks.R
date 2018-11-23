@@ -4,8 +4,9 @@ library(eatDB)
 
 
 # load test data (df1, df2, pkList, fkList)
-load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
-# load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatGADS/tests/testthat/helper_dbdata.rda")
+load(file = "helper_dbdata.rda")
+# load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
+
 
 
 ### Checking primary and foreign keys
@@ -23,15 +24,18 @@ fkList2 <- list(df1 = list(References = "lala", Keys = NULL),
                 df2 = list(References = "df1", Keys = "ID2"))
 fkList3 <- list(df1 = list(References = NULL, Keys = NULL),
                 df2 = list(References = NULL, Keys = "ID2"))
-
+fkList4 <- list(df1 = list(References = NULL, Keys = NULL),
+                df2 = list(References = "df1", Keys = "v1"))
 
 test_that("Errors are called correctly ", {
   expect_error(check_input(dfList = dfList, pkList = pkList2, fkList = fkList),
-               "dfList and pkList have to have identical structure and namings")
+               "dfList and pkList have to have identical structure and namings.")
   expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList2),
-               "Foreign key defined for first data frame")
+               "Foreign key defined for first data frame.")
   expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList3),
-               "Foreign Key reference for df2 must be exactly one other data frame")
+               "Foreign Key reference for df2 must be exactly one other data frame.")
+  expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList4),
+               "v1 are not variables in df2 .")
 })
 
 names(dfList$df1) <- c("v.1", "ID2")
