@@ -24,7 +24,7 @@ dbPull <- function(vSelect = NULL, filePath) {
   varList <- prep_vSelect(vSelect = vSelect, filePath = filePath)
 
   # Establish Connection, disconnect when function exits
-  con <- dbConnect(RSQLite::SQLite(), dbname = filePath)
+  con <- dbConnect_default(dbName = filePath)
   on.exit(dbDisconnect(con))
 
   # 2) get names/structure/mergeorder for data base

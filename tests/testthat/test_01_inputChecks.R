@@ -26,6 +26,9 @@ fkList3 <- list(df1 = list(References = NULL, Keys = NULL),
                 df2 = list(References = NULL, Keys = "ID2"))
 fkList4 <- list(df1 = list(References = NULL, Keys = NULL),
                 df2 = list(References = "df1", Keys = "v1"))
+fkList5 <- list(df1 = list(References = NULL, Keys = NULL),
+                df2 = list(References = "df1", Keys = "v2"))
+
 
 test_that("Errors are called correctly ", {
   expect_error(check_input(dfList = dfList, pkList = pkList2, fkList = fkList),
@@ -36,6 +39,8 @@ test_that("Errors are called correctly ", {
                "Foreign Key reference for df2 must be exactly one other data frame.")
   expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList4),
                "v1 are not variables in df2 .")
+  expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList5),
+               "v2 are not variables in df1 .")
 })
 
 names(dfList$df1) <- c("v.1", "ID2")

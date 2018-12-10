@@ -61,7 +61,7 @@ createDB <- function(dfList, pkList, fkList = NULL, metaData = NULL, filePath) {
   # check path / file
   check_filePath(filePath)
   # Establish Connection, disconnect when function exits
-  con <- dbConnect(RSQLite::SQLite(), dbname = filePath)
+  con <- dbConnect_default(dbName = filePath)
   on.exit(dbDisconnect(con))
 
   ### 3) Execute "create Queries"
@@ -149,6 +149,12 @@ writeQ_mergeOrder <- function(dfMergeOrder) {
 init_DB_shell <- function(filePath) {
   # create DB, throws an error if sqlite3 not in Path!
   shell(cmd = paste("sqlite3", filePath, ".databases", sep = " "), mustWork = TRUE)
+}
+
+# use default driver troughout package
+#dbConnect_default <- function(dbName, drv = MonetDBLite::MonetDBLite()) {
+dbConnect_default <- function(dbName, drv = RSQLite::SQLite()) {
+  dbConnect(drv = drv, dbName)
 }
 
 ## check path for db

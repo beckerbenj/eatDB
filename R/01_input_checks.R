@@ -65,6 +65,7 @@ check_fk <- function(foreignKey, df_name, dfList, pkList) {
   if(!ref %in% names(dfList)) stop(paste("Foreign Key for", df_name, "references not an existing data frame."))
   # keys in both data frames?
   if(any(!keys %in% names(dfList[[df_name]]))) stop(paste(print_keys, "are not variables in", df_name, "."))
+  if(any(!keys %in% names(dfList[[ref]]))) stop(paste(print_keys, "are not variables in", ref, "."))
   return()
 }
 

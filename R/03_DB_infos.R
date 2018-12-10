@@ -22,7 +22,7 @@ dbNames <- function(filePath, includeMeta = FALSE) {
   check_dbPath(dbPath = filePath)
 
   # Establish Connection, disconnect when function exits
-  con <- dbConnect(RSQLite::SQLite(), dbname = filePath)
+  con <- dbConnect_default(dbName = filePath)
   on.exit(dbDisconnect(con))
 
   # get data table names
@@ -62,7 +62,7 @@ dbKeys <- function(filePath, includeMeta = FALSE) {
   check_dbPath(dbPath = filePath)
 
   # Establish Connection, disconnect when function exits
-  con <- dbConnect(RSQLite::SQLite(), dbname = filePath)
+  con <- dbConnect_default(dbName = filePath)
   on.exit(dbDisconnect(con))
 
   # get db names
@@ -135,7 +135,7 @@ dbSingleDF <- function(dfName = 'Meta_Data', filePath) {
   check_dbPath(dbPath = filePath)
 
   # Establish Connection, disconnect when function exits
-  con <- dbConnect(RSQLite::SQLite(), dbname = filePath)
+  con <- dbConnect_default(dbName = filePath)
   on.exit(dbDisconnect(con))
 
   # extract single table from data base

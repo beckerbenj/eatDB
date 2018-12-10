@@ -2,7 +2,8 @@
 context("Interacting with DB")
 library(eatDB)
 
-load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
+# load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
+load(file = "helper_dbdata.rda")
 
 ### names
 test_that("Names are extracted correctly", {
