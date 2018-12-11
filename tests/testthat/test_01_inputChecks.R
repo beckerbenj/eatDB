@@ -43,10 +43,20 @@ test_that("Errors are called correctly ", {
                "v2 are not variables in df1 .")
 })
 
-names(dfList$df1) <- c("v.1", "ID2")
 test_that("Errors are called correctly ", {
+  names(dfList$df1) <- c("v.1", "ID2")
   expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList),
                "Variable names are not allowed to contain '.' in SQLite.")
+})
+
+test_that("Error for character foreign keys", {
+  dfList3 <- dfList2 <- dfList
+  dfList2$df1$ID2 <- as.character(dfList$df1$ID2)
+  dfList3$df2$ID2 <- as.factor(dfList$df2$ID2)
+  expect_error(check_input(dfList = dfList2, pkList = pkList, fkList = fkList),
+               "All foreign keys have to be numeric. Check keys in  df1 .")
+  expect_error(check_input(dfList = dfList3, pkList = pkList, fkList = fkList),
+               "All foreign keys have to be numeric. Check keys in  df2 .")
 })
 
 # tbd: further tests?

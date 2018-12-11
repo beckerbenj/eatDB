@@ -66,6 +66,10 @@ check_fk <- function(foreignKey, df_name, dfList, pkList) {
   # keys in both data frames?
   if(any(!keys %in% names(dfList[[df_name]]))) stop(paste(print_keys, "are not variables in", df_name, "."))
   if(any(!keys %in% names(dfList[[ref]]))) stop(paste(print_keys, "are not variables in", ref, "."))
+  # all keys must be numerics, strings slow down SQLite A LOT
+  #browser()
+  if(any(!is.numeric(dfList[[df_name]][, keys]))) stop(paste("All foreign keys have to be numeric. Check keys in ", df_name, "."))
+  if(any(!is.numeric(dfList[[ref]][, keys]))) stop(paste("All foreign keys have to be numeric. Check keys in ", ref, "."))
   return()
 }
 
