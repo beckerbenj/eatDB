@@ -54,9 +54,17 @@ test_that("Error for character foreign keys", {
   dfList2$df1$ID2 <- as.character(dfList$df1$ID2)
   dfList3$df2$ID2 <- as.factor(dfList$df2$ID2)
   expect_error(check_input(dfList = dfList2, pkList = pkList, fkList = fkList),
-               "All foreign keys have to be numeric. Check keys in  df1 .")
+               "All foreign keys have to be numeric. Check keys in df1.")
   expect_error(check_input(dfList = dfList3, pkList = pkList, fkList = fkList),
-               "All foreign keys have to be numeric. Check keys in  df2 .")
+               "All foreign keys have to be numeric. Check keys in df2.")
+})
+
+test_that("Check for duplicate variables except foreign keys", {
+  dfList2 <- dfList
+  names(dfList2$df2) <- c("ID2", "v1")
+
+  expect_silent(check_dfList(dfList, fkList))
+  expect_error(check_dfList(dfList2, fkList), "Duplicate variables in data frames df1 and df2:\nv1")
 })
 
 # tbd: further tests?
@@ -64,3 +72,5 @@ test_that("Error for character foreign keys", {
 
 # should this test pass?
 #   expect_error(addKeys(bigList = bigList, pkList = pkList3, fkList = fkList), "Foreign Key reference for df2 must be exactly one other data frame")
+
+
