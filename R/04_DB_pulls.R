@@ -50,6 +50,7 @@ prep_vSelect <- function(vSelect, filePath) {
   varList <- list()
   for(df_name in names(allNames)) {
     varList[[df_name]] <- order_vSelect(vSelect = vSelect, allNames_df = allNames[[df_name]])
+    # variables are removed from further selection if they are in the data frame (prevents duplicates; enables later checking)
     vSelect <- vSelect[!vSelect %in% unlist(varList)]
   }
 

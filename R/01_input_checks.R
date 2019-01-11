@@ -32,9 +32,15 @@ check_df <- function(df, primeKey, df_name) {
   illegal_names <- c("Meta_Data", "Meta_Information")
   if(any(names(df) %in% illegal_names)) stop(paste("One of the following forbidden data frame names has been used:",
                                                    paste(illegal_names, collapse = ", ")))
-  if(any(grepl("\\.", names(df)))) stop(paste("Variable names are not allowed to contain '.' in SQLite."))
+  dot_names <- grep("\\.", names(df), value = TRUE)
+  if(length(dot_names)) stop("Variable names ", paste(dot_names, collapse = ", "), " in ", df_name, " contain '.'.")
+  forbid_names <- unlist(lapply(names(df), function(varName) grep(
+    paste0("^", varName, "$"), sqlite_keywords, value = TRUE, ignore.case = TRUE)))
+  if(length(forbid_names) > 0) stop("Variable names ", paste(forbid_names, collapse = ", "), " in ", df_name,
+                                    " are forbidden SQLite Keywords.")
   return()
 }
+
 
 # 02) input checks for primary key ---------------------------------------------------------
 check_pk <- function(primeKey, df, df_name) {

@@ -43,10 +43,17 @@ test_that("Errors are called correctly ", {
                "v2 are not variables in df1 .")
 })
 
-test_that("Errors are called correctly ", {
+test_that("Illegal variable name checking ", {
   names(dfList$df1) <- c("v.1", "ID2")
   expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList),
-               "Variable names are not allowed to contain '.' in SQLite.")
+               "Variable names v.1 in df1 contain '.'.")
+  df <- data.frame(group = 1:2, select = 3:4)
+  dfList <- list(df = df)
+  test_that("Irregular variable names are spotted",{
+    expect_error(createDB(dfList, pkList = list(df = "group"), filePath = ":memory:"),
+                 "Variable names GROUP, SELECT in df are forbidden SQLite Keywords.")
+  })
+
 })
 
 test_that("Error for character foreign keys", {
