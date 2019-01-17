@@ -7,7 +7,7 @@
 dbSingleDF(dfName = "Meta_Data", filePath)
 }
 \arguments{
-\item{dfName}{Name of the data table which should be extracted}
+\item{dfName}{Name of the data table which should be extracted.}
 
 \item{filePath}{Path of the existing db file.}
 }
@@ -15,10 +15,10 @@ dbSingleDF(dfName = "Meta_Data", filePath)
 Returns a data frame with all variables and cases as in the corresponding data table.
 }
 \description{
-Function to extract a single, complete data table from a relational data base. Especially useful for the extraction of the meta information stored in Meta_Data.
+Function to extract a single, complete data table from a relational data base. Especially useful for the extraction of the meta information stored in \code{Meta_Data}.
 }
 \details{
-This function makes use of the DBI::dbReadTable function and extracts a complete data table from a data base. All variables are extracted and all rows are used. For extracting only some variables or merging data tables see dbPull.
+This function makes use of the \code{DBI::dbReadTable} function and extracts a complete data table from a data base. All variables are extracted and all rows are used. For extracting only some variables or merging data tables see \code{\link{dbPull}}.
 }
 \examples{
 # not run:

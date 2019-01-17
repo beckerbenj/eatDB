@@ -2,23 +2,23 @@
 % Please edit documentation in R/04_DB_pulls.R
 \name{dbPull}
 \alias{dbPull}
-\title{Pull data from relational data base.}
+\title{Pull data from a relational data base.}
 \usage{
 dbPull(vSelect = NULL, filePath)
 }
 \arguments{
 \item{vSelect}{Character vector of variables that should be pulled from data base. If vSelect is NULL, all variables from the data base are selected.}
 
-\item{filePath}{Path of the existing db file.}
+\item{filePath}{Path to an the existing db file.}
 }
 \value{
-Returns a data frame, including the selected variables. Variables, that exist in more than one data table are only selected from the first data table in the merge order.
+Returns a data frame, including the selected variables.
 }
 \description{
-Function to extract specific (or all) variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys.
+Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys.
 }
 \details{
-Note that the exact merging process is determined when the data base is created via createDB and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
+Note that the exact merging process is determined when the data base is created via \code{\link{createDB}} and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
 }
 \examples{
 # not run:

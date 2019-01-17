@@ -2,30 +2,30 @@
 % Please edit documentation in R/02_DB_creation.R
 \name{createDB}
 \alias{createDB}
-\title{Create a (relational) data base.}
+\title{Create a relational data base file.}
 \usage{
 createDB(dfList, pkList, fkList = NULL, metaData = NULL, filePath)
 }
 \arguments{
-\item{dfList}{Named list of data frames. The order of the data frames determines the merge order.}
+\item{dfList}{Named list of data frames. The order of the data.frames determines the merge order.}
 
-\item{pkList}{Named list of the primary keys corresponding to the data frames.}
+\item{pkList}{Named list of the primary keys corresponding to the data.frames.}
 
-\item{fkList}{Named list of a list per data frame, including referenced data frame ("References") and the corresponding keys ("Keys"). NULL if only a single data frame is supplied.}
+\item{fkList}{Named list of a list per data.frame, including referenced data frame (\code{fkList$References}) and the corresponding keys \code{fkList$Keys}). Default is \code{NULL}, which should be used if only a single data frame is supplied. For multiple data.frames, \code{fkList$References} and \code{fkList$Keys} should be \code{NULL} for the first data.frame.}
 
-\item{metaData}{Data frame including meta data information about the other data frames.}
+\item{metaData}{[optional] Data.frame including meta data information about the other data.frames.}
 
-\item{filePath}{Path to the db file to write (including name); has to end on '.db'.}
+\item{filePath}{Path to the db file to write (including name); has to end on \code{.db}.}
 }
 \value{
 Creates a data base in the given path, returns NULL.
 }
 \description{
-Creates a relational data base from a list of data frames. The list structure of dfList, pkList and fkList needs to be exactly the same. Keys (pkList and fkList) can either be single variables or combinations of variables. Primary keys (pkList) have to be unique within a single data table. Foreign Keys (fkList) have to consist of a list with the referenced data frame and the referencing keys. All list elements have to be named and in the same order. If a single data frame is to be converted to a data base, fkList can be dropped.
+Creates a relational data base from a list of data.frames (\code{dfList}). The list structure including the naming of \code{dfList}, \code{pkList} and \code{fkList} needs to be exactly the same. Keys (\code{pkList} and \code{fkList$Keys}) can either be character vectors with a single variable name or multiple variable names. Primary keys (\code{pkList}) have to be unique within a single data.frame. Foreign Keys (\code{fkList}) have to consist of a list with the referenced data frame (\code{fkList$References}) and the referencing keys (\code{fkList$Keys}). If a single data frame is to be converted to a data base, \code{pkList} can be dropped. Otherwise, both elements of \code{fkList} need to be set to \code{NULL}.
 }
 \details{
-Primary keys guarantee uniqueness of cases within a single data table, and are single variables or combinations of variables. Foreign keys are used to merge data tables. The foreign key for the first data set is always list(References = NULL, Keys = NULL) The order in which the data frames are supplied determines the merge order. Currently, only Left Joins are implemented. Primary keys have to be variables or combinations of variables that are unique within the data frame.
-Data frames are stored seperatly as a relational data base and are merged if pulled from the data base. Then, data frames are joined in the order in which the data frames were supplied in the list. Left Joints are used for merging. SQLite3 is used as a database system.
+Primary keys guarantee uniqueness of cases within a single data.frame, and are single variables or combinations of variables. Foreign keys are used to merge data.frames. The foreign key for the first data set always has to be set to \code{list(References = NULL, Keys = NULL)}. The order in which the data.frames are supplied determines the merge order. Currently, left joins are performed when merging data.frames. However, data.frames are stored seperatly in the relational data base and are only merged if pulled from the data base. \\
+Conventions for naming variables (columns) follow naming conventions of SQLite3. '.' and \code{\link{sqlite_keywords}} are prohibited. Two additional tables within the SQLite3 data base are created: \code{Meta_Information}, which contains a single character with the merge order that is used by \code{\link{dbPull}} and \code{Meta_Data}, which contains the meta data.frame supplied to the argument \code{metaData}.
 }
 \examples{
 # Set up data frames

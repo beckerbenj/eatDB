@@ -2,14 +2,14 @@
 % Please edit documentation in R/03_DB_infos.R
 \name{dbNames}
 \alias{dbNames}
-\title{Variable names in a relational data base.}
+\title{Get variable names from a relational data base.}
 \usage{
 dbNames(filePath, includeMeta = FALSE)
 }
 \arguments{
-\item{filePath}{Path of an existing db file.}
+\item{filePath}{Path of an existing \code{.db} file.}
 
-\item{includeMeta}{Should the variable names of the Meta_Data table be included.}
+\item{includeMeta}{Should the variable names of the \code{Meta_Data} table be included.}
 }
 \value{
 Returns a named list of character vectors with the variables names included in the data tables.

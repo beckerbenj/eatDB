@@ -2,14 +2,14 @@
 % Please edit documentation in R/03_DB_infos.R
 \name{dbKeys}
 \alias{dbKeys}
-\title{Keys in a relational data base.}
+\title{Get keys from a relational data base.}
 \usage{
 dbKeys(filePath, includeMeta = FALSE)
 }
 \arguments{
 \item{filePath}{Path of the existing db file.}
 
-\item{includeMeta}{Should information about the Meta_Data table be included.}
+\item{includeMeta}{Should information about the \code{Meta_Data} table be included.}
 }
 \value{
 Returns a list named as the data tables in the db. Each elements contains a list with the primary key, the

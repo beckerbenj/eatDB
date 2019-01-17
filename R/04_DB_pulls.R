@@ -1,16 +1,16 @@
 
 #### Extracting data from relational data base
 #############################################################################
-#' Pull data from relational data base.
+#' Pull data from a relational data base.
 #'
-#' Function to extract specific (or all) variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys.
+#' Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys.
 #'
-#' Note that the exact merging process is determined when the data base is created via createDB and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
+#' Note that the exact merging process is determined when the data base is created via \code{\link{createDB}} and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
 #'
 #'@param vSelect Character vector of variables that should be pulled from data base. If vSelect is NULL, all variables from the data base are selected.
-#'@param filePath Path of the existing db file.
+#'@param filePath Path to an the existing db file.
 #'
-#'@return Returns a data frame, including the selected variables. Variables, that exist in more than one data table are only selected from the first data table in the merge order.
+#'@return Returns a data frame, including the selected variables.
 #'
 #'@examples
 #' # not run:

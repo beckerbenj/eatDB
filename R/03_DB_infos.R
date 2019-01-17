@@ -1,14 +1,14 @@
 
 #### Viewing Interface to data base
 #############################################################################
-#' Variable names in a relational data base.
+#' Get variable names from a relational data base.
 #'
 #' Function to get the names of the variables included in the relational data base.
 #'
 #' Extracts names of all variables included in the relational data base, structured as a list with the individual data tables as elements.
 #'
-#'@param filePath Path of an existing db file.
-#'@param includeMeta Should the variable names of the Meta_Data table be included.
+#'@param filePath Path of an existing \code{.db} file.
+#'@param includeMeta Should the variable names of the \code{Meta_Data} table be included.
 #'
 #'@return Returns a named list of character vectors with the variables names included in the data tables.
 #'
@@ -38,7 +38,7 @@ dbNames <- function(filePath, includeMeta = FALSE) {
 }
 
 #############################################################################
-#' Keys in a relational data base.
+#' Get keys from a relational data base.
 #'
 #' Function to get the primary and foreign keys of the data frames in the relational data base.
 #'
@@ -47,7 +47,7 @@ dbNames <- function(filePath, includeMeta = FALSE) {
 #' key structure of a relational data base.
 #'
 #'@param filePath Path of the existing db file.
-#'@param includeMeta Should information about the Meta_Data table be included.
+#'@param includeMeta Should information about the \code{Meta_Data} table be included.
 #'
 #'@return Returns a list named as the data tables in the db. Each elements contains a list with the primary key, the
 #' data table it references to and the corresponding foreign keys.
@@ -115,11 +115,11 @@ extract_FKs <- function(table_info) {
 #############################################################################
 #' Extract a single data table from a relational data base.
 #'
-#' Function to extract a single, complete data table from a relational data base. Especially useful for the extraction of the meta information stored in Meta_Data.
+#' Function to extract a single, complete data table from a relational data base. Especially useful for the extraction of the meta information stored in \code{Meta_Data}.
 #'
-#' This function makes use of the DBI::dbReadTable function and extracts a complete data table from a data base. All variables are extracted and all rows are used. For extracting only some variables or merging data tables see dbPull.
+#' This function makes use of the \code{DBI::dbReadTable} function and extracts a complete data table from a data base. All variables are extracted and all rows are used. For extracting only some variables or merging data tables see \code{\link{dbPull}}.
 #'
-#'@param dfName Name of the data table which should be extracted
+#'@param dfName Name of the data table which should be extracted.
 #'@param filePath Path of the existing db file.
 #'
 #'@return Returns a data frame with all variables and cases as in the corresponding data table.
