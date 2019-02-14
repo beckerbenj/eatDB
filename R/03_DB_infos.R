@@ -23,12 +23,12 @@ dbNames <- function(filePath, includeMeta = FALSE) {
 
   # Establish Connection, disconnect when function exits
   con <- dbConnect_default(dbName = filePath)
-  on.exit(dbDisconnect(con))
+  on.exit(DBI::dbDisconnect(con))
 
   # get data table names
-  dtNames <- dbListTables(con)
+  dtNames <- DBI::dbListTables(con)
   # get all variable names in these tables
-  nameList <- lapply(dtNames, dbListFields, conn = con)
+  nameList <- lapply(dtNames, DBI::dbListFields, conn = con)
   names(nameList) <- dtNames
 
   # drop information about meta data tables
@@ -63,7 +63,7 @@ dbKeys <- function(filePath, includeMeta = FALSE) {
 
   # Establish Connection, disconnect when function exits
   con <- dbConnect_default(dbName = filePath)
-  on.exit(dbDisconnect(con))
+  on.exit(DBI::dbDisconnect(con))
 
   # get db names
   dtNames <- names(dbNames(filePath, includeMeta = includeMeta))
@@ -78,7 +78,7 @@ dbKeys <- function(filePath, includeMeta = FALSE) {
   ## foreign keys
   fkQueries <- paste("PRAGMA foreign_key_list(", dtNames, ")")
   # execute query and transform info
-  fk_table <- lapply(fkQueries, dbGetQuery, conn = con)
+  fk_table <- lapply(fkQueries, DBI::dbGetQuery, conn = con)
   fk_list <- lapply(fk_table, extract_FKs)
 
   ## structure and name output
@@ -136,10 +136,10 @@ dbSingleDF <- function(dfName = 'Meta_Data', filePath) {
 
   # Establish Connection, disconnect when function exits
   con <- dbConnect_default(dbName = filePath)
-  on.exit(dbDisconnect(con))
+  on.exit(DBI::dbDisconnect(con))
 
   # extract single table from data base
-  out <- dbReadTable(conn = con, name = dfName)
+  out <- DBI::dbReadTable(conn = con, name = dfName)
 
   out
 }

@@ -61,7 +61,7 @@ createDB <- function(dfList, pkList, fkList = NULL, metaData = NULL, filePath) {
   check_filePath(filePath)
   # Establish Connection, disconnect when function exits
   con <- dbConnect_default(dbName = filePath)
-  on.exit(dbDisconnect(con))
+  on.exit(DBI::dbDisconnect(con))
 
   ### 3) Execute "create Queries"
   lapply(createQueries, dbExecute_safe, conn = con)
@@ -69,9 +69,9 @@ createDB <- function(dfList, pkList, fkList = NULL, metaData = NULL, filePath) {
   ### 4) fill data base tables with data
   # a) normale data tables
   lapply(seq_along(dfList), function(i)
-    dbWriteTable(conn = con, name = names(dfList)[i], value = dfList[[i]], append = TRUE))
+    DBI::dbWriteTable(conn = con, name = names(dfList)[i], value = dfList[[i]], append = TRUE))
   # b) meta data table
-  if(!is.null(metaData)) dbWriteTable(conn = con, name = labelDT_name, value = metaData, append = TRUE)
+  if(!is.null(metaData)) DBI::dbWriteTable(conn = con, name = labelDT_name, value = metaData, append = TRUE)
 
   return()
 }
@@ -153,7 +153,7 @@ init_DB_shell <- function(filePath) {
 # use default driver troughout package
 #dbConnect_default <- function(dbName, drv = MonetDBLite::MonetDBLite()) {
 dbConnect_default <- function(dbName, drv = RSQLite::SQLite()) {
-  dbConnect(drv = drv, dbName)
+  DBI::dbConnect(drv = drv, dbName)
 }
 
 ## check path for db
@@ -180,7 +180,7 @@ check_filePath <- function(filePath){
 # 03) Execute Create Queries ---------------------------------------------------------
 # safe version of dbExecute with verbose error
 dbExecute_safe <- function(conn, statement) {
-  check <- try(dbExecute(conn = conn, statement = statement))
+  check <- try(DBI::dbExecute(conn = conn, statement = statement))
   if(class(check) == "try-error") {
     stop(paste("Error while trying to execute the following query: \n", statement))
   }

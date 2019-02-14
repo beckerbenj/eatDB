@@ -25,7 +25,7 @@ dbPull <- function(vSelect = NULL, filePath) {
 
   # Establish Connection, disconnect when function exits
   con <- dbConnect_default(dbName = filePath)
-  on.exit(dbDisconnect(con))
+  on.exit(DBI::dbDisconnect(con))
 
   # 2) get names/structure/mergeorder for data base
   keyList <- dbKeys(filePath, includeMeta = FALSE)
@@ -74,7 +74,7 @@ order_vSelect <- function(allNames_df, vSelect) {
 ### 2) Get Meta-Information from DB ---------------------------------------------------------
 get_mergeOrder <- function(con) {
   q <- "SELECT * FROM Meta_Information;"
-  mergeOrder <- dbGetQuery(conn = con, statement = q)
+  mergeOrder <- DBI::dbGetQuery(conn = con, statement = q)
   # restore original format
   mO <- unlist(strsplit(unlist(mergeOrder), " "))
   names(mO) <- NULL
@@ -121,9 +121,9 @@ write_varNames <- function(dfName, vars) {
 
 
 # 04) Execute Queries ---------------------------------------------------------
-# safe version of dbExecute with verbose error
+# safe version of dbGet with verbose error
 dbGet_safe <- function(conn, statement) {
-  check <- try(dbGetQuery(conn = conn, statement = statement))
+  check <- try(DBI::dbGetQuery(conn = conn, statement = statement))
   if(class(check) == "try-error") {
     stop(paste("Error while trying to execute the following query", statement))
   }
