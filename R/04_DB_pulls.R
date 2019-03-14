@@ -92,8 +92,9 @@ writeQ_pull <- function(varList, mergeOrder, fkList) {
         mergeOrder[1],
         ljoins, ";")
 }
-# part of query for left joins
+# part of query for left joins (return empty string if data base consists of only on data table)
 write_LJoins <- function(mergeOrder, fkList) {
+  if(length(fkList) <= 1) return("")
   joins <- vector("character")
   for(i in 2:length(mergeOrder)) {
     keyName <- fkList[[mergeOrder[i]]]$Keys

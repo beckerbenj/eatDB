@@ -45,7 +45,7 @@ check_df <- function(df, primeKey, df_name) {
 # 02) input checks for primary key ---------------------------------------------------------
 check_pk <- function(primeKey, df, df_name) {
   print_keys <- paste(primeKey, collapse = " ,")
-  if(!any(primeKey %in% names(df))) stop(paste(print_keys, "are not variables in", df_name))
+  if(!all(primeKey %in% names(df))) stop(paste(print_keys, "are not variables in", df_name))
 }
 
 # 03) input checks for foreign key ---------------------------------------------------------

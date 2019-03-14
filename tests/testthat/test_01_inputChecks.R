@@ -20,6 +20,8 @@ pkList2 <- list(df1 = "v1",
                 df3 = "ID2")
 pkList3 <- list(df1 = "v1",
                 df2 = "ID2")
+pkList4 <- list(df1 = "v1",
+                df2 = "ID5")
 fkList2 <- list(df1 = list(References = "lala", Keys = NULL),
                 df2 = list(References = "df1", Keys = "ID2"))
 fkList3 <- list(df1 = list(References = NULL, Keys = NULL),
@@ -41,6 +43,8 @@ test_that("Errors are called correctly ", {
                "v1 are not variables in df2 .")
   expect_error(check_input(dfList = dfList, pkList = pkList, fkList = fkList5),
                "v2 are not variables in df1 .")
+  expect_error(check_input(dfList = dfList, pkList = pkList4, fkList = fkList5),
+               "ID5 are not variables in df2")
 })
 
 test_that("Illegal variable name checking ", {

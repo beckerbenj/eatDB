@@ -4,7 +4,8 @@ context("Pull and merge data from DB")
 library(eatDB)
 
 # load test data (df1, df2, pkList, fkList)
-load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
+# load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
+load(file = "helper_dbdata.rda")
 
 
 ### variable input check
@@ -26,6 +27,8 @@ test_that("Variable selection prepared correctly for output all variables", {
 test_that("Left Joins formulated correctly based on foreign keys and merge Order", {
   expect_identical(write_LJoins(c("df1", "df2"), fkList = fkList),
                    "LEFT JOIN df2 using ( ID2  )")
+  no_fkList <- fkList[1]
+  expect_identical(write_LJoins(c("df1", "df2"), fkList = no_fkList),"")
 })
 
 test_that("Variable selection pasted correctly for single data frame", {
@@ -63,6 +66,13 @@ test_that("Merged results are correct if one data table has no variables in outp
   expect_equal(dbPull(vSelect = c("v1", "ID2"), filePath = "helper_database.db"), expected[1, -3])
 })
 
+test_that("dbPull for single table data base",{
+  # out <- dbPull(filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dataBase_singleTable.db")
+  out <- dbPull(filePath = "helper_dataBase_singleTable.db")
+  out2 <- dbPull(filePath = "helper_dataBase_singleTable.db", vSelect = "ID2")
+  expect_equal(out, dfList$df1)
+  expect_equal(out2, dfList$df1[, 2, drop = F])
+})
 
 
 #dbPull(vSelect = c("v1", "ID2"), filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")
