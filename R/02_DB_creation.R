@@ -188,6 +188,6 @@ dbExecute_safe <- function(conn, statement) {
 
 # 05) Index creation ---------------------------------------------------------
 # not necessary, if joins are performed on primary keys, as for these auto indexes are generated
-writeQ_indexes <- function() {
-  out <- paste("CREATE INDEX", some_index_same, "ON", datatable, "(", variables, ");")
-}
+#writeQ_indexes <- function() {
+#  out <- paste("CREATE INDEX", some_index_same, "ON", datatable, "(", variables, ");")
+#}

@@ -5,7 +5,7 @@
 #'
 #' Function to get the names of the variables included in the relational data base.
 #'
-#' Extracts names of all variables included in the relational data base, structured as a list with the individual data tables as elements.
+#' Extracts names of all variables included in the relational data base, structured as a list with the individual data tables as elements. The ordering in the list is equivalent to the merge order used when data is pulled from the data base.
 #'
 #'@param filePath Path of an existing \code{.db} file.
 #'@param includeMeta Should the variable names of the \code{Meta_Data} table be included.
@@ -26,7 +26,12 @@ dbNames <- function(filePath, includeMeta = FALSE) {
   on.exit(DBI::dbDisconnect(con))
 
   # get data table names
-  dtNames <- DBI::dbListTables(con)
+  dtNames <- get_mergeOrder(con)
+  dtNames <- c(dtNames, "Meta_Data", "Meta_Information")
+
+  # plausability check for data table names
+  if(!all(DBI::dbListTables(con) %in% dtNames)) stop("Merge order information incompatible with data table names.")
+
   # get all variable names in these tables
   nameList <- lapply(dtNames, DBI::dbListFields, conn = con)
   names(nameList) <- dtNames
@@ -72,7 +77,7 @@ dbKeys <- function(filePath, includeMeta = FALSE) {
   # create query
   pkQueries <- paste("PRAGMA table_info(", dtNames, ")")
   # execute query and transform info
-  pk_table <- lapply(pkQueries, dbGetQuery, conn = con)
+  pk_table <- lapply(pkQueries, DBI::dbGetQuery, conn = con)
   pk_list <- lapply(pk_table, extract_PKs)
 
   ## foreign keys

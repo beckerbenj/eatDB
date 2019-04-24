@@ -18,7 +18,7 @@ Returns a named list of character vectors with the variables names included in t
 Function to get the names of the variables included in the relational data base.
 }
 \details{
-Extracts names of all variables included in the relational data base, structured as a list with the individual data tables as elements.
+Extracts names of all variables included in the relational data base, structured as a list with the individual data tables as elements. The ordering in the list is equivalent to the merge order used when data is pulled from the data base.
 }
 \examples{
 # not run:

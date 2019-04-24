@@ -17,6 +17,7 @@ test_that("Variable selection checked correctly", {
 
 test_that("Variable selection prepared correctly", {
   expect_identical(prep_vSelect(c("v1", "ID2"), filePath = "helper_database.db"), list(df1 = c("v1", "ID2"), df2 = character(0)))
+  # prep_vSelect(c("v1", "ID2"), filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")
 })
 
 test_that("Variable selection prepared correctly for output all variables", {
@@ -77,3 +78,37 @@ test_that("dbPull for single table data base",{
 
 #dbPull(vSelect = c("v1", "ID2"), filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")
 #dbPull(vSelect = NULL, filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")
+
+### Right joins performed correclty
+test_that("Specific join behaviour for incomplete ID matches", {
+  ## more cases in first table: rows are kept and NAs on variables from table 2
+  comp <- merge(dfList2$df1, dfList$df2, by = "ID2", all.x = TRUE)[, c(2, 1, 3)]
+  # out <- dbPull(filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dataBase2.db")
+  out <- dbPull(filePath = "helper_dataBase2.db")
+  expect_equal(comp, out)
+  ## more cases in second table: rows are dropped
+  comp <- merge(dfList3$df1, dfList$df2, by = "ID2", all.x = T)[, c(2, 1, 3)]
+  out <- dbPull(filePath = "helper_dataBase3.db")
+  expect_equal(comp, out)
+})
+
+
+test_that("Fixed that alphabetical ordering screws everything up!", {
+  ## Names
+  # dbNames(filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dataBase4.db")
+  # dbKeys(filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dataBase4.db")
+  expect_equal(names(dbNames(filePath = "helper_dataBase4.db")), c("b_df", "a_df"))
+  expect_equal(names(dbKeys(filePath = "helper_dataBase4.db")$pkList), c("b_df", "a_df"))
+
+  comp <- merge(dfList2$df1, dfList$df2, by = "ID2", all.x = TRUE)[, c(2, 1, 3)]
+  # out <- dbPull(filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dataBase4.db")
+  out <- dbPull(filePath = "helper_dataBase4.db")
+  expect_equal(comp, out)
+
+  # out <- dbPull(filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dataBase4.db", vSelect = "ID2")
+  out <- dbPull(filePath = "helper_dataBase4.db", vSelect = "ID2")
+  expect_equal(out, data.frame(ID2 = c(1, 2)))
+})
+
+## make these tests work!!
+

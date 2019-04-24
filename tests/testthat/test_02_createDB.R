@@ -33,7 +33,7 @@ test_that("Create Query for foreign key", {
 #
 test_that("Create Query for a single data frame", {
   createdQuery <- writeQ_create(dfList$df1, pkList$df1, fkList$df1, "df1")
-  expected <- "CREATE TABLE df1 ( v1 REAL, ID2 REAL , PRIMARY KEY ( v1 )  );"
+  expected <- "CREATE TABLE df1 ( v1 REAL, ID2 REAL , PRIMARY KEY ( ID2 )  );"
   expect_equal(createdQuery, expected)
 })
 
