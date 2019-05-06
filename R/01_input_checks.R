@@ -73,6 +73,12 @@ check_fk <- function(foreignKey, df_name, dfList, pkList) {
   # keys in both data frames?
   if(any(!keys %in% names(dfList[[df_name]]))) stop(paste(print_keys, "are not variables in", df_name, "."))
   if(any(!keys %in% names(dfList[[ref]]))) stop(paste(print_keys, "are not variables in", ref, "."))
+
+  # test whether there are rows lost by left joins and full joins become necessary
+  for(i in keys) {
+    if(any(!dfList[[df_name]][[i]] %in% dfList[[ref]][[i]])) warning("For some cases, left joining by ", i, " will yield weird results.", call. = FALSE)
+  }
+
   # all keys must be numerics, strings slow down SQLite A LOT
   if(any(!unlist(lapply(dfList[[df_name]][, keys], is.numeric)))) stop("All foreign keys have to be numeric. Check keys in ", df_name, ".")
   if(any(!unlist(lapply(dfList[[ref]][, keys], is.numeric)))) stop("All foreign keys have to be numeric. Check keys in ", ref, ".")

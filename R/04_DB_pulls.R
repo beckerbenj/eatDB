@@ -118,7 +118,12 @@ write_varNames <- function(dfName, vars) {
   if(length(vars) == 0) return(character(0))
   paste(dfName, ".", vars, sep = "")
 }
-
+# additional SQL Syntax for Full Join
+write_addFullJoins <- function() {
+  #tbd
+  # unclear, how full joings can be implemented
+  # Problem: multiple joins at work
+}
 
 
 # 04) Execute Queries ---------------------------------------------------------
