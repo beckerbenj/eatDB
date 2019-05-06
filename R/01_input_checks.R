@@ -76,7 +76,7 @@ check_fk <- function(foreignKey, df_name, dfList, pkList) {
 
   # test whether there are rows lost by left joins and full joins become necessary
   for(i in keys) {
-    if(any(!dfList[[df_name]][[i]] %in% dfList[[ref]][[i]])) warning("For some cases, left joining by ", i, " will yield weird results.", call. = FALSE)
+    if(any(!dfList[[df_name]][[i]] %in% dfList[[ref]][[i]])) warning("For some rows, left joining ", df_name, " and ", ref, " by ", i, " will yield weird results.", call. = FALSE)
   }
 
   # all keys must be numerics, strings slow down SQLite A LOT

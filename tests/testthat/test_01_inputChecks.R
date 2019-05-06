@@ -73,7 +73,7 @@ test_that("Error for character foreign keys", {
 test_that("Test if left joins are sufficient", {
   dfList2 <- dfList
   dfList2$df2[3, ] <- c(3, 1)
-  expect_warning(check_input(dfList = dfList2, pkList = pkList, fkList = fkList), "For some cases, left joining by ID2 will yield weird results.")
+  expect_warning(check_input(dfList = dfList2, pkList = pkList, fkList = fkList), "For some rows, left joining df2 and df1 by ID2 will yield weird results.")
   dfList3 <- dfList
   dfList3$df1[2, ] <- c(3, 3)
   expect_silent(check_input(dfList = dfList3, pkList = pkList, fkList = fkList))
