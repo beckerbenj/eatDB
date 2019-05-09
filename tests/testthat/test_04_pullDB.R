@@ -9,19 +9,30 @@ load(file = "helper_dbdata.rda")
 
 
 ### variable input check
+allNames <- dbNames("helper_database.db")
+pkList <- dbKeys("helper_database.db")$pkList
+# allNames <- dbNames("c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")
+# pkList <- dbKeys("c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")$pkList
+
+
+
 test_that("Variable selection checked correctly", {
-  expect_error(prep_vSelect(c("ID2", "ID3"), filePath = "helper_database.db"),
+  expect_error(prep_vSelect(c("ID2", "ID3"), allNames, pkList),
                "ID3 are not in the data base")
-  expect_silent(prep_vSelect(c("ID2", "v1"), filePath = "helper_database.db"))
+  expect_silent(prep_vSelect(c("ID2", "v1"), allNames, pkList))
 })
 
 test_that("Variable selection prepared correctly", {
-  expect_identical(prep_vSelect(c("v1", "ID2"), filePath = "helper_database.db"), list(df1 = c("v1", "ID2"), df2 = character(0)))
-  # prep_vSelect(c("v1", "ID2"), filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")
+  expect_identical(prep_vSelect(c("v1", "ID2"), allNames, pkList), list(df1 = c("v1", "ID2"), df2 = character(0)))
+  # prep_vSelect(c("v1", "ID2"), allNames, pkList)
 })
 
 test_that("Variable selection prepared correctly for output all variables", {
-  expect_identical(prep_vSelect(vSelect = NULL, filePath = "helper_database.db"), list(df1 = c("v1", "ID2"), df2 = c("v2")))
+  expect_identical(prep_vSelect(vSelect = NULL, allNames, pkList), list(df1 = c("v1", "ID2"), df2 = c("v2")))
+})
+
+test_that("Missing primary keys are added if missing", {
+  expect_identical(prep_vSelect(vSelect = ("v1"), allNames, pkList), list(df1 = c("v1", "ID2"), df2 = character(0)))
 })
 
 ### Query creation

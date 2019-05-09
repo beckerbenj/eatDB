@@ -3,7 +3,7 @@
 #############################################################################
 #' Pull data from a relational data base.
 #'
-#' Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys.
+#' Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys. If variables are selected from a specific data table, the corresponding primary keys are also always extracted.
 #'
 #' Note that the exact merging process is determined when the data base is created via \code{\link{createDB}} and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
 #'
@@ -20,15 +20,20 @@
 dbPull <- function(vSelect = NULL, filePath) {
   # 1) check input
   check_dbPath(dbPath = filePath)
+
+  # extract relevant information from DB for preparation of pull
+  keyList <- dbKeys(filePath, includeMeta = FALSE)
+  allNames <- dbNames(filePath = filePath)
+
   # check names and sort to data tables
-  varList <- prep_vSelect(vSelect = vSelect, filePath = filePath)
+  varList <- prep_vSelect(vSelect = vSelect, allNames = allNames, pkList = keyList$pkList)
 
   # Establish Connection, disconnect when function exits
   con <- dbConnect_default(dbName = filePath)
   on.exit(DBI::dbDisconnect(con))
 
   # 2) get names/structure/mergeorder for data base
-  keyList <- dbKeys(filePath, includeMeta = FALSE)
+
   mergeOrder <- get_mergeOrder(con)
 
   # 3) create query
@@ -41,9 +46,7 @@ dbPull <- function(vSelect = NULL, filePath) {
 }
 
 ### 1) Input check ---------------------------------------------------------
-prep_vSelect <- function(vSelect, filePath) {
-  allNames <- dbNames(filePath = filePath)
-
+prep_vSelect <- function(vSelect, allNames, pkList) {
   # all variables are selected
   if(is.null(vSelect)) vSelect <- unique(unlist(allNames))
   # create List with data table attribution
@@ -52,6 +55,13 @@ prep_vSelect <- function(vSelect, filePath) {
     varList[[df_name]] <- order_vSelect(vSelect = vSelect, allNames_df = allNames[[df_name]])
     # variables are removed from further selection if they are in the data frame (prevents duplicates; enables later checking)
     vSelect <- vSelect[!vSelect %in% unlist(varList)]
+
+    # add Primary Keys if missing and if any variables are selected (otherwise often data useless), keep in order of data table
+    # don't add if it has been added in an earlier data table
+    if(length(varList[[df_name]]) > 0){
+      add_pks <- setdiff(pkList[[df_name]], unlist(varList))
+      varList[[df_name]] <- order_vSelect(c(varList[[df_name]], add_pks), allNames_df = allNames[[df_name]])
+    }
   }
 
   # check if all names anywhere in data set

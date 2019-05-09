@@ -15,7 +15,7 @@ dbPull(vSelect = NULL, filePath)
 Returns a data frame, including the selected variables.
 }
 \description{
-Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys.
+Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys. If variables are selected from a specific data table, the corresponding primary keys are also always extracted.
 }
 \details{
 Note that the exact merging process is determined when the data base is created via \code{\link{createDB}} and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
