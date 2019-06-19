@@ -3,7 +3,7 @@
 #############################################################################
 #' Pull data from a relational data base.
 #'
-#' Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys. If variables are selected from a specific data table, the corresponding primary keys are also always extracted.
+#' Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys. If variables are selected from a specific data table, the corresponding primary keys are also always extracted. If no variables from the first data tables in the mergeOrder are selected, these data tables are skipped (up till the first variable - data table match).
 #'
 #' Note that the exact merging process is determined when the data base is created via \code{\link{createDB}} and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
 #'
@@ -32,9 +32,9 @@ dbPull <- function(vSelect = NULL, filePath) {
   con <- dbConnect_default(dbName = filePath)
   on.exit(DBI::dbDisconnect(con))
 
-  # 2) get names/structure/mergeorder for data base
-
+  # 2) get names/structure/mergeorder for data base, sort varList by mergeOrder!
   mergeOrder <- get_mergeOrder(con)
+  varList <- varList[match(mergeOrder, names(varList))]
 
   # 3) create query
   pullQ <- writeQ_pull(mergeOrder = mergeOrder, fkList = keyList$fkList, varList = varList)
@@ -94,17 +94,31 @@ get_mergeOrder <- function(con) {
 
 ### 3) Create Pull Query ---------------------------------------------------------
 writeQ_pull <- function(varList, mergeOrder, fkList) {
+  mergeOrder <- shorten_mergeOrder(mergeOrder = mergeOrder, varList = varList)
   ljoins <- write_LJoins(mergeOrder = mergeOrder, fkList = fkList)
   selVars <- write_SEL(varList = varList)
+  if("bista" %in% unlist(varList)) browser()
   # put together query
   paste("SELECT DISTINCT", selVars ,
         "FROM",
         mergeOrder[1],
         ljoins, ";")
 }
+# Kind of Hotfix: shorten mergeOrder to skip earlier data tables that are not needed
+shorten_mergeOrder <- function(mergeOrder, varList) {
+  test_used <- sapply(varList, function(l) length(l) > 0)
+  # if(all(!test_used)) return(mergeOrder)
+  start_data_table <- names(test_used)[test_used][1]
+  mergeOrder_start <- which(mergeOrder == start_data_table)
+  new_mergeOrder <- mergeOrder[mergeOrder_start:length(mergeOrder)]
+  new_mergeOrder
+}
+
+
 # part of query for left joins (return empty string if data base consists of only on data table)
 write_LJoins <- function(mergeOrder, fkList) {
   if(length(fkList) <= 1) return("")
+  if(length(mergeOrder) <= 1) return("")
   joins <- vector("character")
   for(i in 2:length(mergeOrder)) {
     keyName <- fkList[[mergeOrder[i]]]$Keys
