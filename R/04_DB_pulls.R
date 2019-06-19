@@ -97,7 +97,6 @@ writeQ_pull <- function(varList, mergeOrder, fkList) {
   mergeOrder <- shorten_mergeOrder(mergeOrder = mergeOrder, varList = varList)
   ljoins <- write_LJoins(mergeOrder = mergeOrder, fkList = fkList)
   selVars <- write_SEL(varList = varList)
-  if("bista" %in% unlist(varList)) browser()
   # put together query
   paste("SELECT DISTINCT", selVars ,
         "FROM",
