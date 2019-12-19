@@ -9,9 +9,9 @@ load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/he
 createDB(dfList = dfList, pkList = pkList, fkList = fkList, metaData = metaData, filePath = ":memory:")
 
 ### test shell + sqlite3
-test_that("Data base can be created via Shell ", {
-  expect_silent(init_DB_shell(filePath = ":memory:"))
-})
+#test_that("Data base can be created via Shell ", {
+#  expect_silent(init_DB_shell(filePath = ":memory:"))
+#})
 
 ### data table query creation
 test_that("Create partial Query for variable definitions", {

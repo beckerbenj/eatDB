@@ -145,10 +145,10 @@ writeQ_mergeOrder <- function(dfMergeOrder) {
 # 02) Create Empty Database ---------------------------------------------------------
 ## create DB via Shell, deprecated because not needed!
 # initiate via dbConnect
-init_DB_shell <- function(filePath) {
+#init_DB_shell <- function(filePath) {
   # create DB, throws an error if sqlite3 not in Path!
-  shell(cmd = paste("sqlite3", filePath, ".databases", sep = " "), mustWork = TRUE)
-}
+#  shell(cmd = paste("sqlite3", filePath, ".databases", sep = " "), mustWork = TRUE)
+#}
 
 # use default driver troughout package
 #dbConnect_default <- function(dbName, drv = MonetDBLite::MonetDBLite()) {
