@@ -27,7 +27,7 @@ check_df <- function(df, primeKey, df_name) {
   if(identical(df_name, "")) stop("Data frame with empty name.")
 
   # names data frame
-  if(any(duplicated(names(df)))) stop(paste("Some variables names in ", df_name, "are duplicates"))
+  if(any(duplicated(tolower(names(df))))) stop(paste("Some variables names in", df_name, "are duplicates"))
   if(any(identical(names(df), ""))) stop(paste("Some variables names in ", df_name, "are empty"))
   illegal_names <- c("Meta_Data", "Meta_Information")
   if(any(names(df) %in% illegal_names)) stop(paste("One of the following forbidden data frame names has been used:",

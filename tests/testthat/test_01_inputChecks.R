@@ -57,7 +57,6 @@ test_that("Illegal variable name checking ", {
     expect_error(createDB(dfList, pkList = list(df = "group"), filePath = ":memory:"),
                  "Variable names GROUP, SELECT in df are forbidden SQLite Keywords.")
   })
-
 })
 
 test_that("Error for character foreign keys", {
@@ -79,7 +78,15 @@ test_that("Test if left joins are sufficient", {
   expect_silent(check_input(dfList = dfList3, pkList = pkList, fkList = fkList))
 })
 
-test_that("Check for duplicate variables except foreign keys", {
+test_that("Check for duplicate variables within a data table", {
+  dfList2 <- dfList
+  names(dfList2$df2) <- c("id1", "ID1")
+
+  expect_silent(check_df(dfList$df2, pkList$df2, df_name = "df2"))
+  expect_error(check_df(dfList2$df2, pkList$df2, df_name = "df2"), "Some variables names in df2 are duplicates")
+})
+
+test_that("Check for duplicate variables except foreign keys across data tables", {
   dfList2 <- dfList
   names(dfList2$df2) <- c("ID2", "v1")
 
