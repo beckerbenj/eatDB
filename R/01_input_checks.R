@@ -51,7 +51,7 @@ check_pk <- function(primeKey, df, df_name) {
 # 03) input checks for foreign key ---------------------------------------------------------
 check_fk <- function(foreignKey, df_name, dfList, pkList) {
   print_keys <- paste(foreignKey[[2]], collapse = " ,")
-  if(length(foreignKey) != 2 || !names(foreignKey) %in% c("References", "Keys")) {
+  if(length(foreignKey) != 2 || !all(names(foreignKey) %in% c("References", "Keys"))) {
     stop("Foreign Keys for ", df_name, " have incorrect format, check help for correct formatting.")
   }
 

@@ -1,12 +1,12 @@
 Package: eatDB
 Type: Package
 Title: Spreadsheet Interface for Relational Databases
-Version: 0.2.4
+Version: 0.3.0
 Authors@R: person("Benjamin", "Becker", email = "b.becker@iqb.hu.berlin.de", role = c("aut", "cre"))
 Description: eatDB allows the creation and use of SQLite3 as a database system for data storage and usage via a complete R interface, treating the data as if it was a single spreadsheet.
-License: MIT + file LICENSE
+License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.4.0), DBI, RSQLite
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.2
 Suggests: testthat
