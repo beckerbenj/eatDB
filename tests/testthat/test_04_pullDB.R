@@ -82,7 +82,7 @@ test_that("Merged results are correct for complete pulls", {
 })
 
 test_that("Merged results are correct if one data table has no variables in output", {
-  expect_equal(dbPull(vSelect = c("v1", "ID2"), filePath = "helper_database.db"), expected[1, -3])
+  expect_equal(dbPull(vSelect = c("v1", "ID2"), filePath = "helper_dataBase.db"), expected[1, -3])
   # out3 <- dbPull(filePath = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dataBase.db", vSelect = "v2")
   out3 <- dbPull(filePath = "helper_dataBase.db", vSelect = "v2")
   expect_equal(out3, dfList$df2)
