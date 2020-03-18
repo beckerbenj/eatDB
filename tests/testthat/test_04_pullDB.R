@@ -9,8 +9,8 @@ load(file = "helper_dbdata.rda")
 
 
 ### variable input check
-allNames <- dbNames("helper_database.db")
-pkList <- dbKeys("helper_database.db")$pkList
+allNames <- dbNames("helper_dataBase.db")
+pkList <- dbKeys("helper_dataBase.db")$pkList
 # allNames <- dbNames("c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")
 # pkList <- dbKeys("c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_database.db")$pkList
 
