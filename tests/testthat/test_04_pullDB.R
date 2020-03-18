@@ -78,7 +78,7 @@ expected <- m1[, c(2, 1, 3)]
 
 
 test_that("Merged results are correct for complete pulls", {
-  expect_equal(dbPull(filePath = "helper_database.db"), expected)
+  expect_equal(dbPull(filePath = "helper_dataBase.db"), expected)
 })
 
 test_that("Merged results are correct if one data table has no variables in output", {
