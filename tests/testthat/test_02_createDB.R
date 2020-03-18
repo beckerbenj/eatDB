@@ -3,7 +3,8 @@ context("Create Data Base")
 library(eatDB)
 
 # load test data (df1, df2, pkList, fkList)
-load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
+#load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
+load(file = "helper_dbdata.rda")
 
 # create in memory db
 createDB(dfList = dfList, pkList = pkList, fkList = fkList, metaData = metaData, filePath = ":memory:")

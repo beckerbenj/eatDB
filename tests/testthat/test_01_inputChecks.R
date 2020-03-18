@@ -4,9 +4,8 @@ library(eatDB)
 
 
 # load test data (df1, df2, pkList, fkList)
-load(file = "helper_dbdata.rda")
 # load(file = "c:/Benjamin_Becker/02_Repositories/packages/eatDB/tests/testthat/helper_dbdata.rda")
-
+load(file = "helper_dbdata.rda")
 
 
 ### Checking primary and foreign keys
