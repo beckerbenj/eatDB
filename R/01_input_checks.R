@@ -35,7 +35,7 @@ check_df <- function(df, primeKey, df_name) {
   dot_names <- grep("\\.", names(df), value = TRUE)
   if(length(dot_names)) stop("Variable names ", paste(dot_names, collapse = ", "), " in ", df_name, " contain '.'.")
   forbid_names <- unlist(lapply(names(df), function(varName) grep(
-    paste0("^", varName, "$"), sqlite_keywords, value = TRUE, ignore.case = TRUE)))
+    paste0("^", varName, "$"), eatDB::sqlite_keywords, value = TRUE, ignore.case = TRUE)))
   if(length(forbid_names) > 0) stop("Variable names ", paste(forbid_names, collapse = ", "), " in ", df_name,
                                     " are forbidden SQLite Keywords.")
   return()
