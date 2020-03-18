@@ -1,7 +1,7 @@
 # eatDB
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/beckerbenj/eatDB.svg?branch=master)](https://travis-ci.org/beckerbenj/eatDB)
+[![Travis build status](https://travis-ci.org/beckerbenj/eatDB.svg?branch=master)](https://travis-ci.org/beckerbenj/eatDB) [![codecov](https://codecov.io/github/beckerbenj/eatDB/branch/master/graphs/badge.svg)](https://codecov.io/github/beckerbenj/eatDB)
 <!-- badges: end -->
 
 
