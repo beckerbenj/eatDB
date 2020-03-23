@@ -7,6 +7,18 @@ r:
   - release
   - devel
 
+os:
+  - linux
+  - osx
+
+matrix:
+ exclude:
+    - r:  devel
+      os: osx
+    - r:  oldrel
+      os: osx
+
+
 r_packages:
   - covr
 
