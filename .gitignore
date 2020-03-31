@@ -28,4 +28,4 @@ rsconnect/
 .Rproj.user
 
 # Ignore folder with other code
-/other_code
+/otherCode
