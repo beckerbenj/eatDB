@@ -47,7 +47,7 @@ dbNames <- function(filePath, includeMeta = FALSE) {
 #'
 #' Function to get the primary and foreign keys of the data frames in the relational data base.
 #'
-#' Data in a relational data base are indexed by primary and foreign keys. Primary keys are unique indentifiers
+#' Data in a relational data base are indexed by primary and foreign keys. Primary keys are unique identifiers
 #' inside a single data table. Foreign keys reference (link) to other data tables. This function returns the
 #' key structure of a relational data base.
 #'

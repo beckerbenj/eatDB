@@ -3,11 +3,11 @@
 #############################################################################
 #' Pull data from a relational data base.
 #'
-#' Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys. If variables are selected from a specific data table, the corresponding primary keys are also always extracted. If no variables from the first data tables in the mergeOrder are selected, these data tables are skipped (up till the first variable - data table match).
+#' Function to extract specific variables from various data tables. Variables are merged in the specified merge order via left joins and using the foreign keys. If variables are selected from a specific data table, the corresponding primary keys are also always extracted. If no variables from the first data tables in the \code{mergeOrder} are selected, these data tables are skipped (up till the first variable - data table match).
 #'
-#' Note that the exact merging process is determined when the data base is created via \code{\link{createDB}} and can not be altered posthoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
+#' Note that the exact merging process is determined when the data base is created via \code{\link{createDB}} and can not be altered post hoc. Further options (e.g. including all variables of a single data table, filtering cases, full joins) are still under development. If you want to use the package and have specific requests, please contact the package author.
 #'
-#'@param vSelect Character vector of variables that should be pulled from data base. If vSelect is NULL, all variables from the data base are selected.
+#'@param vSelect Character vector of variables that should be pulled from data base. If \code{vSelect} is \code{NULL}, all variables from the data base are selected.
 #'@param filePath Path to an the existing db file.
 #'
 #'@return Returns a data frame, including the selected variables.
