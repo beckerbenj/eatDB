@@ -29,17 +29,41 @@ Conventions for naming variables (columns) follow naming conventions of SQLite3.
 }
 \examples{
 # Set up data frames
-df1 <- data.frame(v1 = 1, ID2 = 1)
-df2 <- data.frame(ID2 = 1:1, v2 = 1:2)
-dfList <- list(df1 = df1, df2 = df2)
+NoImp <- data.frame(ID = 1:5,
+                   age = sample(12:17, size = 5, replace = TRUE),
+                   weight = sample(40:60, size = 5, replace = TRUE))
+Imp <- data.frame(ID = rep(1:5, 3),
+                 imp = c(rep(1, 5), rep(2, 5), rep(3, 5)),
+                 noBooks = sample(1:200, 15, replace = TRUE))
+PVs <- data.frame(ID = rep(rep(1:5, 3), 2),
+                 imp = rep(c(rep(1, 5), rep(2, 5), rep(3, 5)), 2),
+                 subject = c(rep("math", 15), rep("reading", 15)),
+                 pv = sample(seq(from = -1.75, to = 1.75, by = 0.05), 30, replace = TRUE),
+                 stringsAsFactors = FALSE)
 
-# Specify primary keys
-pkList <- list(df1 = "v1", df2 = c("ID2", "v2"))
-# Specify foreign keys
-fkList <- list(df1 = list(References = NULL, Keys = NULL),
-               df2 = list(References = "df1", Keys = "ID2"))
+# Combine into named list
+dfList <- list(NoImp = NoImp, Imp = Imp, PVs = PVs)
+
+# Define primary and foreign keys accordingly
+pkList <- list(NoImp = "ID",
+               Imp = c("ID", "imp"),
+               PVs = c("ID", "imp", "subject"))
+fkList <- list(NoImp = list(References = NULL, Keys = NULL),
+               Imp = list(References = "NoImp", Keys = "ID"),
+               PVs = list(References = "Imp", Keys = c("ID", "imp")))
+
+# Optional metaData
+metaData <- data.frame(varName = c("ID", "age", "weight", "imp", "noBooks", "subject", "pv"),
+                      varLabel = c("ID variable", "Age in years", "Body weight in kilogram",
+                                   "Multiple Imputation number",
+                                   "Number of books at home (self reported)",
+                                   "Competence domain (Mathematical Literacy/Reading Literacy",
+                                   "Plausible value"),
+                      data_table = c(rep("NoImp", 3), rep("Imp", 2), rep("PVs", 2)),
+                      stringsAsFactors = FALSE)
 
 # Create in memory data base
-createDB(dfList = dfList, pkList = pkList, fkList = fkList, metaData = NULL, filePath = ":memory:")
+createDB(dfList = dfList, pkList = pkList, fkList = fkList, metaData = metaData,
+         filePath = ":memory:")
 
 }

@@ -13,8 +13,14 @@
 #'@return Returns a named list of character vectors with the variables names included in the data tables.
 #'
 #'@examples
-#' # not run:
-#' # dbNames(filePath = "exampleDB.db")
+#' db_path <- system.file("extdata", "example_dataBase.db", package = "eatDB")
+#' varNames <- dbNames(db_path)
+#'
+#' ## Names of data tables
+#' names(varNames)
+#'
+#' ## Variable names in data table "NoImp"
+#' varNames$NoImp
 #'
 #'@export
 dbNames <- function(filePath, includeMeta = FALSE) {
@@ -58,8 +64,14 @@ dbNames <- function(filePath, includeMeta = FALSE) {
 #' data table it references to and the corresponding foreign keys.
 #'
 #'@examples
-#' # not run:
-#' # dbKeys(filePath = "exampleDB.db")
+#' db_path <- system.file("extdata", "example_dataBase.db", package = "eatDB")
+#' keys <- dbKeys(db_path)
+#'
+#' ## primary key structure of the database
+#' keys$pkList
+#'
+#' ## foreign key structure of the database
+#' keys$fkList
 #'
 #'@export
 dbKeys <- function(filePath, includeMeta = FALSE) {
@@ -130,9 +142,15 @@ extract_FKs <- function(table_info) {
 #'@return Returns a data frame with all variables and cases as in the corresponding data table.
 #'
 #'@examples
-#' # not run:
-#' # Extract Meta Data
-#' # dbSingleDF(df_name = "Meta_Data", filePath = "exampleDB.db")
+#' db_path <- system.file("extdata", "example_dataBase.db", package = "eatDB")
+#'
+#' ## Extract all meta information
+#' meta_data <- dbSingleDF(dfName = "Meta_Data", filePath = db_path)
+#' meta_data
+#'
+#' ## Extract a specific data table
+#' NoImp <- dbSingleDF(dfName = "NoImp", filePath = db_path)
+#' NoImp
 #'
 #'@export
 dbSingleDF <- function(dfName = 'Meta_Data', filePath) {

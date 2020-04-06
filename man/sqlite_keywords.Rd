@@ -4,7 +4,9 @@
 \name{sqlite_keywords}
 \alias{sqlite_keywords}
 \title{Vector of SQLite Keywords.}
-\format{A character vector.}
+\format{
+A character vector.
+}
 \source{
 \url{https://www.sqlite.org/c3ref/keyword_check.html}
 }

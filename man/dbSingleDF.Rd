@@ -21,8 +21,14 @@ Function to extract a single, complete data table from a relational data base. E
 This function makes use of the \code{DBI::dbReadTable} function and extracts a complete data table from a data base. All variables are extracted and all rows are used. For extracting only some variables or merging data tables see \code{\link{dbPull}}.
 }
 \examples{
-# not run:
-# Extract Meta Data
-# dbSingleDF(df_name = "Meta_Data", filePath = "exampleDB.db")
+db_path <- system.file("extdata", "example_dataBase.db", package = "eatDB")
+
+## Extract all meta information
+meta_data <- dbSingleDF(dfName = "Meta_Data", filePath = db_path)
+meta_data
+
+## Extract a specific data table
+NoImp <- dbSingleDF(dfName = "NoImp", filePath = db_path)
+NoImp
 
 }

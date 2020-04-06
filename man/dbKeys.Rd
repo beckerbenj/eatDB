@@ -24,7 +24,13 @@ inside a single data table. Foreign keys reference (link) to other data tables. 
 key structure of a relational data base.
 }
 \examples{
-# not run:
-# dbKeys(filePath = "exampleDB.db")
+db_path <- system.file("extdata", "example_dataBase.db", package = "eatDB")
+keys <- dbKeys(db_path)
+
+## primary key structure of the database
+keys$pkList
+
+## foreign key structure of the database
+keys$fkList
 
 }

@@ -21,7 +21,13 @@ Function to get the names of the variables included in the relational data base.
 Extracts names of all variables included in the relational data base, structured as a list with the individual data tables as elements. The ordering in the list is equivalent to the merge order used when data is pulled from the data base.
 }
 \examples{
-# not run:
-# dbNames(filePath = "exampleDB.db")
+db_path <- system.file("extdata", "example_dataBase.db", package = "eatDB")
+varNames <- dbNames(db_path)
+
+## Names of data tables
+names(varNames)
+
+## Variable names in data table "NoImp"
+varNames$NoImp
 
 }
