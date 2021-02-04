@@ -1,6 +1,7 @@
 # eatDB 0.4.1.9000
 
 * Switched to Github Action for CI
+* Setup `revdepcheck`
 
 # eatDB 0.4.1
 
