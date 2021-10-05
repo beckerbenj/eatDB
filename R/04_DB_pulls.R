@@ -42,6 +42,7 @@ dbPull <- function(vSelect = NULL, filePath) {
   varList <- prep_vSelect(vSelect = vSelect, allNames = allNames, pkList = keyList$pkList)
 
   # shortcut if all variables from single table (might be more memory intensive but faster for larger data sets)
+  # also guarantees correct structure for pulls from one data table! (important feature)
   table_with_vars <- sapply(varList, length) > 0
   if(sum(table_with_vars) == 1) {
     #browser()
