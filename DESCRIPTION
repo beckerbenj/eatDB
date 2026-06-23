@@ -11,3 +11,4 @@ Depends: R (>= 3.4.0)
 Imports: DBI, RSQLite
 RoxygenNote: 7.1.1
 Suggests: testthat
+URL: https://beckerbenj.github.io/eatDB/
